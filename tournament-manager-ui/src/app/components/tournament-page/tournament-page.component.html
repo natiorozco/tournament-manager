@@ -1,4 +1,7 @@
-<div class="brackets-container">
-  <!-- Aquí se insertará el viewer de brackets -->
-  <div id="brackets"></div>
-</div>
+
+@if (loadedData.length > 0) {
+    @for (item of loadedData; track $index) {
+        <app-stage-viewer [bracketsId]="'tournament-' + $index" [stageData]="item"></app-stage-viewer>
+    }
+    <br>
+}
