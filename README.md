@@ -2,14 +2,14 @@
 
 **Isaac Villalobos Bonilla**  
 **Carlos Abarca Apellido**  
-**Dilan Apellido Apellido**  
+**Dilan Hernández Sánchez**  
 **Natalia Orozco Delgado**
 
 ---
 
 ## Para levantar todo
 
-Desde la raíz:
+Desde la raíz del proyecto se corre:
 ```bash
 chmod +x start-all.sh
 ./start-all.sh
@@ -17,14 +17,14 @@ chmod +x start-all.sh
 
 ---
 
-O bien, manualmente:
+O manualmente:
 
-1. Métete a la carpeta de API y UI y corre:
+1. Meterse a la carpeta de API y UI y correr:
    ```bash
    docker-compose build
    docker-compose up -d
    ```
-2. Después, métete a la carpeta del observer y corre:
+2. Meterse a la carpeta del observer y correr:
    ```bash
    docker-compose build
    docker-compose up
@@ -39,7 +39,7 @@ docker exec -ti tournament-designer-db bash
 mongosh
 ```
 
-Se puede probar con:
+Se puede probar con: (por ejemplo)
 ```bash
 show dbs
 ```
