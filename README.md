@@ -1,7 +1,7 @@
 # Taller #1 Bases de Datos II
 
 **Isaac Villalobos Bonilla**  
-**Carlos Abarca Apellido**  
+**Carlos Abarca Mora**  
 **Dilan Hernández Sánchez**  
 **Natalia Orozco Delgado**
 
