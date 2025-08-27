@@ -60,12 +60,14 @@ app.post('/upload-data', async (req, res) => {
 
     // Enviar string a Kafka SOLO si kafkajs está instalado y disponible
     try {
-      const { Kafka } = require('kafkajs');
+      const { Kafka, Partitioners } = require('kafkajs');
       const kafka = new Kafka({
         clientId: 'tournament-api',
         brokers: [process.env.KAFKA_BROKER || 'kafka:9092'],
       });
-      const producer = kafka.producer();
+      const producer = kafka.producer({
+        createPartitioner: Partitioners.LegacyPartitioner
+      });
       await producer.connect();
       await producer.send({
         topic: 'tournament-events',
