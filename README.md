@@ -45,7 +45,7 @@ show dbs
 ```
 
 ---
-## 🚀 Guía de Inicio Rápido: Configuración del Proyecto
+## Guía de Inicio Rápido: Configuración del Proyecto
 
 A continuación, se detallan los pasos necesarios para configurar y ejecutar el proyecto. Sigue las instrucciones en el orden indicado para asegurar una correcta instalación y conexión entre los servicios.
 
