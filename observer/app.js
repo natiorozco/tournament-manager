@@ -6,12 +6,12 @@ const kafka = new Kafka({
   brokers: ['kafka:9092'], // direccion del broker
 });
 
-const consumer = kafka.consumer({ groupId: 'kafka-group' });
+const consumer = kafka.consumer({ groupId: 'tournament-group' });
 
 const run = async () => {
   // Conectar el consumidor
   await consumer.connect();
-  await consumer.subscribe({ topic: 'test-topic', fromBeginning: true });
+  await consumer.subscribe({ topic: 'tournament-events', fromBeginning: true });
 
   console.log('Esperando mensajes...');
 
