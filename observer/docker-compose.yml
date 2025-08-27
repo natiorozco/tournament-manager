@@ -1,4 +1,5 @@
 services:
+
   kafka:
     image: confluentinc/cp-kafka:7.9.1
     ports:
@@ -19,6 +20,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      internal_net:
+        aliases:
+          - kafka
+
 
 
   node-app:
@@ -29,21 +35,21 @@ services:
     environment:
       KAFKA_BROKER: kafka:9092
     command: ["node", "app.js"]
+    networks:
+      - internal_net
 
-  producer:
-    build: .
-    depends_on:
-      kafka:
-        condition: service_healthy
-    environment:
-      KAFKA_BROKER: kafka:9092
-    command: ["node", "producer.js"]
 
-  consumer:
-    build: .
-    depends_on:
-      kafka:
-        condition: service_healthy
-    environment:
-      KAFKA_BROKER: kafka:9092
-    command: ["node", "consumer.js"]
+#  producer:
+#    build: .
+#    depends_on:
+#      kafka:
+#        condition: service_healthy
+#    environment:
+#      KAFKA_BROKER: kafka:9092
+#    command: ["node", "producer.js"]
+#    networks:
+#      - internal_net
+
+networks:
+  internal_net:
+    external: true
