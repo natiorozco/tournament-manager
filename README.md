@@ -54,6 +54,7 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
 1.  **Instalar Angular CLI:**
     Para que la interfaz de usuario (UI) funcione correctamente y se carguen sus elementos, primero debemos instalar Angular CLI globalmente.
     ```bash
+    npm i
     npm install -g @angular/cli
     ```
 
@@ -88,6 +89,11 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
     docker-compose up --build -d
     ```
 
+4. **Iniciar API/UI**
+   Dentro de la carpeta principal, osea la raíz, ejecutamos el siguiente comando solo si ya está inicializado el Kafka
+   ```bash
+    docker-compose up --build -d
+    ```
 ---
 
 ### 🔄 Reiniciar el Consumidor
