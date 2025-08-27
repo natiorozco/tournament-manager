@@ -76,31 +76,31 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
     docker network create internal_net
     ```
 
-2.  **Verificar la red:**
-    Asegúrate de que todos los contenedores se estén ejecutando en la misma red.
-    ```bash
-    docker network inspect internal_net
-    ```
-    Este comando te mostrará los detalles de la red, incluyendo los contenedores conectados.
-
 3.  **Iniciar el contenedor de Kafka:**
     Dentro de la carpeta `observer`, inicia los servicios de Docker definidos en `docker-compose.yml`.
     ```bash
     docker-compose up --build -d
     ```
 
+5. ### 🔄 Reiniciar el Consumidor
+    Como el consumidor se levanta al mismo tiempo que el **Broker** de Kafka, es necesario reiniciarlo para que se conecte correctamente una vez que el **Broker** esté completamente operativo.
+    ```bash
+    docker-compose restart node-app
+    ```
+
+6.  **Verificar la red y ver mensajes:**
+    Hay que asegurar que Kafka esté corriendo dentro de la red que hemos creado. Además, para darnos cuenta que Kafka funciona correctamente tenemos que iniciar la consola para asegurarnos con el mensaje de confirmación entonnces iniciamos una terminal y la dejamos reportando.
+    ```bash
+    docker network inspect internal_net
+    docker logs -f <id del contenedor>
+    ```
+
 4. **Iniciar API/UI**
-   Dentro de la carpeta principal, osea la raíz, ejecutamos el siguiente comando solo si ya está inicializado el Kafka
+   Dentro de la carpeta principal, osea la raíz, ejecutamos el siguiente comando solo si ya está inicializado el Kafka.
    ```bash
     docker-compose up --build -d
     ```
 ---
 
-### 🔄 Reiniciar el Consumidor
 
-1.  **Reiniciar la aplicación del observador:**
-    Como el consumidor se levanta al mismo tiempo que el **Broker** de Kafka, es necesario reiniciarlo para que se conecte correctamente una vez que el **Broker** esté completamente operativo.
-    ```bash
-    docker-compose restart node-app
-    ```
 
