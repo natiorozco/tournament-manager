@@ -53,11 +53,35 @@ const Tournament = model("Tournament", tournamentSchema);
 
 app.post('/upload-data', async (req, res) => {
   const data = req.body;
-  // Here you would handle the data upload logic
   console.log("Data received:", data);
 
-  await Tournament.insertMany(req.body);
-  res.status(201).json({ message: `Inserted ${req.body.length} tournaments!` });
+  try {
+    await Tournament.insertMany(req.body);
+
+    // Enviar string a Kafka SOLO si kafkajs está instalado y disponible
+    try {
+      const { Kafka } = require('kafkajs');
+      const kafka = new Kafka({
+        clientId: 'tournament-api',
+        brokers: [process.env.KAFKA_BROKER || 'kafka:9092'],
+      });
+      const producer = kafka.producer();
+      await producer.connect();
+      await producer.send({
+        topic: 'tournament-events',
+        messages: [{ value: 'Torneo registrado exitosamente' }],
+      });
+      await producer.disconnect();
+      console.log('Mensaje enviado a Kafka: Torneo registrado exitosamente');
+    } catch (kafkaErr) {
+      console.error('No se pudo enviar mensaje a Kafka:', kafkaErr);
+    }
+
+    res.status(201).json({ message: `Inserted ${req.body.length} tournaments!` });
+  } catch (err) {
+    console.error('Error al insertar torneo:', err);
+    res.status(500).json({ error: 'Error al registrar torneo' });
+  }
 });
 
 app.get('/fetch-tournaments', async (req, res) => {
