@@ -70,13 +70,17 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
 
 ### 🌐 Configuración de la Red y Docker
 
-1.  **Crear la red de Docker:**
-    Crea una red interna para que los contenedores de la API/UI y Kafka puedan comunicarse entre sí dentro del entorno de Docker.
+3.  **Crear la red de Docker:**
+    Crea una red interna para que los contenedores de la API/UI y Kafka puedan comunicarse entre sí dentro del entorno de Docker. Además hay que crear una partición y Topic.
     ```bash
     docker network create internal_net
+
+    docker exec -it observer-kafka-1 kafka-topics --create --topic tournament-events --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+    docker exec -it observer-kafka-1 kafka-topics --list --bootstrap-server localhost:9092 // Sirve para darse cuenta si se creó el TOPIC correctamente
     ```
 
-3.  **Iniciar el contenedor de Kafka:**
+4.  **Iniciar el contenedor de Kafka:**
     Dentro de la carpeta `observer`, inicia los servicios de Docker definidos en `docker-compose.yml`.
     ```bash
     docker-compose up --build -d
@@ -95,10 +99,42 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
     docker logs -f <id del contenedor>
     ```
 
-4. **Iniciar API/UI**
+7. **Iniciar API/UI**
    Dentro de la carpeta principal, osea la raíz, ejecutamos el siguiente comando solo si ya está inicializado el Kafka.
    ```bash
     docker-compose up --build -d
+    ```
+
+8. **Probar con Postman**
+   Abrimos Postman para probar las funcionalidades de Kafka y la inserción de torneos, para eso utilizamos el siguiente comando para dejar las dos consolas de los contenedores listas:
+   ```bash
+    docker-compose logs -f <id del contenedor>
+    ```
+   Ahora mediante la siguiente dirección enviamos el JSON respectivo:
+
+   http://localhost:3000/upload-data
+
+   ```json
+    [
+     {
+       "title": "Senior Avanzados Hombres",
+       "type": "single_elimination",
+       "roster": [
+         {
+           "id": 93,
+           "name": "93 - [Karate Patito] Juan Perez",
+           "weight": 83,
+           "age": 45
+         },
+         {
+           "id": 94,
+           "name": "94 - [Karate los pollitos] Pedro Picapiedra",
+           "weight": 82,
+           "age": 44
+         }
+       ]
+     }
+   ]
     ```
 ---
 
