@@ -63,9 +63,11 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
     ```bash
     cd Torneos\observer
     npm i
+    ```
+    **Instalar dependencias en API**
+    ```bash
     npm install kafkajs
     ```
-
 ---
 
 ### 🌐 Configuración de la Red y Docker
