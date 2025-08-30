@@ -4,47 +4,8 @@
 **Carlos Abarca Mora**  
 **Dilan Hernández Sánchez**  
 **Natalia Orozco Delgado**
-
 ---
 
-## Para levantar todo
-
-Desde la raíz del proyecto se corre:
-```bash
-chmod +x start-all.sh
-./start-all.sh
-```
-
----
-
-O manualmente:
-
-1. Meterse a la carpeta de API y UI y correr:
-   ```bash
-   docker-compose build
-   docker-compose up -d
-   ```
-2. Meterse a la carpeta del observer y correr:
-   ```bash
-   docker-compose build
-   docker-compose up
-   ```
-
----
-
-## Para comprobar la conexión con mongo
-
-```bash
-docker exec -ti tournament-designer-db bash
-mongosh
-```
-
-Se puede probar con: (por ejemplo)
-```bash
-show dbs
-```
-
----
 ## Guía de Inicio Rápido: Configuración del Proyecto
 
 A continuación, se detallan los pasos necesarios para configurar y ejecutar el proyecto. Sigue las instrucciones en el orden indicado para asegurar una correcta instalación y conexión entre los servicios.
@@ -142,3 +103,16 @@ A continuación, se detallan los pasos necesarios para configurar y ejecutar el 
 
 
 
+## Para comprobar la conexión con mongo
+
+```bash
+docker exec -ti tournament-designer-db bash
+mongosh
+```
+
+Se puede probar con: (por ejemplo)
+```bash
+show dbs
+```
+
+---
